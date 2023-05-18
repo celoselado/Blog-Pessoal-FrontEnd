@@ -1,0 +1,23 @@
+.titulo{
+    color: purple;
+    text-align: center;
+}
+
+.img{
+    width: 500px;
+    height: 500px;
+    display: block;
+    margin: 0 auto;
+}
+
+.botaoMouse{
+    background-color: white;
+
+
+}
+
+.botaoMouse:hover{
+    background-color: black
+}
+
+/* #57C5B6   borderColor: "white", backgroundColor: "#57C5B6", color: "white" 
