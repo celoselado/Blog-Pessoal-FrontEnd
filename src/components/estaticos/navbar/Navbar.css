@@ -2,6 +2,13 @@
     background-color: #1A5F7A !important;
 }
 
-.text-decoration-none{
-    text-decoration: none;
+---
+
+.cursor{
+    cursor: pointer;
+    color: white;
+}
+
+.text-decoration-none2{
+    text-decoration: none !important;
 }

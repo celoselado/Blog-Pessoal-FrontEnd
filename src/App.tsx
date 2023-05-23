@@ -7,6 +7,9 @@ import Navbar from "./components/estaticos/navbar/Navbar";
 import Footer from "./components/estaticos/footer/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./paginas/login/Login";
+import CadastroUsuario from "./paginas/cadastroUsuario/CadastroUsuario";
+import ListaPostagens from "./components/postagens/listapostagens/ListaPostagem";
+import ListaTema from "./components/temas/listatema/ListaTema";
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element= {<Login />} />
           <Route path="/login" element= {<Login />} />
+          <Route path="/cadastrousuario" element= {<CadastroUsuario />} />
+          <Route path="/postagens" element= {<ListaPostagens />} />
+          <Route path="/temas" element= {<ListaTema />} />
         </Routes>
       </div>
       <Footer />

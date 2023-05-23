@@ -9,34 +9,40 @@ function Navbar() {
         <AppBar position="static" className='corNavBar' >
                 <Toolbar variant="dense"  >
                 <Grid container justifyContent={'space-between'} >
-                    <Box style={{ cursor: "pointer" }}  >
+                    <Box className='cursor'  >
                         <Typography variant="h5" color="inherit">
                             BlogPessoal
                         </Typography>
                     </Box>
                     <Box display="flex" justifyContent="start">
-                        <Box mx={1} style={{ cursor: "pointer" }}>
+                    <Link to='/login' className=' text-decoration-none2'  > 
+                    <Box mx={1} className='cursor' color='white' >
                             <Typography variant="h6" color="inherit">
                                 Home
                             </Typography>
                         </Box>
-                        <Box mx={1} style={{ cursor: "pointer" }}>
+                    </Link>
+                        <Link to='/postagens' className=' text-decoration-none2' >
+                        <Box mx={1} className='cursor' color='white'>
                             <Typography variant="h6" color="inherit">
                                 | Postagens
                             </Typography>
                         </Box>
-                        <Box mx={1} style={{ cursor: "pointer" }}>
+                        </Link>
+                        <Link to= '/temas' className='text-decoration-none2'>
+                        <Box mx={1} className='cursor' color='white'>
                             <Typography variant="h6" color="inherit">
                                 | Temas
                             </Typography>
                         </Box>
-                        <Box mx={1} style={{ cursor: "pointer" }}>
+                        </Link>
+                        <Box mx={1} className='cursor'>
                             <Typography variant="h6" color="inherit">
                                 | Cadastrar Tema
                             </Typography>
                         </Box>
-                        <Link to='/login' className=' text-decoration-none' >
-                            <Box mx={1} style={{ cursor: "pointer" }} color='white'>
+                        <Link to='/' className=' text-decoration-none' >
+                            <Box mx={1} className='cursor' color='white'>
                                 <Typography variant="h6" color="inherit">
                                     | LogOut
                                 </Typography>

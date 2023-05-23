@@ -1,0 +1,17 @@
+.imagem2{
+    background-image: url(https://pbs.twimg.com/media/E_sIp-oWUAIeVHI.jpg);
+    background-repeat: 'no-repeat';
+    width: 100vh;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center
+    
+}
+
+.texto2{
+    font-weight: bold !important;
+}
+
+.btnCadastrar{
+    margin-right: 20px !important;
+}

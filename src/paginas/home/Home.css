@@ -11,13 +11,26 @@
 }
 
 .botaoMouse{
-    background-color: white;
-
-
+    border-color: "white";
+    background-color: "white";
+    color: "black" 
 }
 
 .botaoMouse:hover{
     background-color: black
 }
 
-/* #57C5B6   borderColor: "white", backgroundColor: "#57C5B6", color: "white" 
+/* #57C5B6   borderColor: "white", backgroundColor: "#57C5B6", color: "white" */
+
+.caixa{
+    background-color: #159895;
+}
+
+.titulo{
+    color: white;
+    font-weight: "bold";
+}
+
+.postagens{
+    background-color: "white" 
+}
