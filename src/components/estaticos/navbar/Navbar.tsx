@@ -2,9 +2,22 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Box, Grid} from '@material-ui/core';
 import './Navbar.css'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import useLocalStorage from 'react-use-localstorage';
 
 function Navbar() {
+
+    const [token, setToken] = useLocalStorage('token')
+    let navigate = useNavigate()
+
+    function goLogout(){
+        setToken('')
+        alert('Usuário deslogado! ^^')
+        navigate('/login')
+    }
+
     return(
+        
         <>
         <AppBar position="static" className='corNavBar' >
                 <Toolbar variant="dense"  >
@@ -15,7 +28,7 @@ function Navbar() {
                         </Typography>
                     </Box>
                     <Box display="flex" justifyContent="start">
-                    <Link to='/login' className=' text-decoration-none2'  > 
+                    <Link to='/home' className=' text-decoration-none2'  > 
                     <Box mx={1} className='cursor' color='white' >
                             <Typography variant="h6" color="inherit">
                                 Home
@@ -36,18 +49,18 @@ function Navbar() {
                             </Typography>
                         </Box>
                         </Link>
-                        <Box mx={1} className='cursor'>
+                        <Link to='/formularioTema' className=' text-decoration-none'>
+                        <Box mx={1} className='cursor' color='white' >
                             <Typography variant="h6" color="inherit">
                                 | Cadastrar Tema
                             </Typography>
                         </Box>
-                        <Link to='/' className=' text-decoration-none' >
-                            <Box mx={1} className='cursor' color='white'>
+                        </Link>
+                            <Box mx={1} className='cursor' onClick={goLogout}>
                                 <Typography variant="h6" color="inherit">
                                     | LogOut
                                 </Typography>
                             </Box>
-                        </Link>
                     </Box>
                     </Grid>
                 </Toolbar>

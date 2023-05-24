@@ -28,7 +28,6 @@ function Home() {
                     <TabPostagem />
                 </Grid>
             </Grid>
-            <ListaPostagens />
         </>
     )
 }
