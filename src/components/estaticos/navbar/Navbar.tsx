@@ -20,7 +20,7 @@ function Navbar() {
 
     function goLogout(){
         dispatch(addToken(''));
-        toast.success('Usuario deslogado! Até mais o/', {
+        toast.info('Usuario deslogado! Até mais o/', {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
