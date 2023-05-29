@@ -13,15 +13,29 @@ import { Box } from "@mui/material";
 import "./ListaPostagem.css";
 import useLocalStorage from "react-use-localstorage";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { TokenState } from "../../../store/tokens/tokensReducer";
+import { toast } from "react-toastify";
 
 function ListaPostagem() {
     const [posts, setPosts] = useState<Postagem[]>([]);
-    const [token, setToken] = useLocalStorage("token");
     let navigate = useNavigate();
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
 
     useEffect(() => {
         if (token == "") {
-            alert("Você precisa estar logado");
+            toast.warn('Você precisa estar logado para acessar! :/', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
             navigate("/login");
         }
     }, [token]);

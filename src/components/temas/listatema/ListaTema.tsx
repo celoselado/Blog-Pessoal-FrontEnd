@@ -4,11 +4,36 @@ import { Link, useNavigate } from 'react-router-dom';
 import useLocalStorage from 'react-use-localstorage';
 import { busca } from '../../../services/Service';
 import Tema from '../../../models/Tema';
+import { useDispatch, useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import { Action, addToken } from '../../../store/tokens/actions';
+import { toast } from 'react-toastify';
 
 function ListaTemas() {
 const [temas, setTemas] = useState<Tema[]>([])
 const navigate = useNavigate();
-const [token, setToken] = useLocalStorage('token');
+const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+);
+
+const dispatch= useDispatch()
+
+useEffect(()=>{
+    if(token == ''){
+        toast.warn('Você precisa estar logado para acessar! :/', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+    navigate("/login")
+    }
+}, [token])
+
 
 async function getTemas() {
     // alterado a função pra dentro de um try catch, para poder verificar a validade do token do usuário
@@ -23,8 +48,17 @@ async function getTemas() {
       // a parte do catch, vai receber qlquer mensagem de erro que chegue, e caso a mensagem tenha um 403 no seu texto
       // significa que o token já expirou. Iremos alertar o usuário sobre isso, apagar o token do navegador, e levá-lo para a tela de login
     if(error.toString().includes('403')) {
-        alert('O seu token expirou, logue novamente')
-        setToken('')
+        toast.warn('Seu token expirou! Logue novamente! :/', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+        dispatch(addToken(''))
         navigate('/login')
     }
     }
@@ -32,13 +66,6 @@ async function getTemas() {
 
 useEffect(() => {
     getTemas()
-}, [])
-
-useEffect(() => {
-    if(token === ''){ 
-    alert('Ta tirando né??? sem token não rola')
-    navigate('/login')
-    }
 }, [])
 
 return (
@@ -57,17 +84,17 @@ return (
         <CardActions>
             <Box display="flex" justifyContent="center" mb={1.5} >
 
-            <Link to="" className="text-decorator-none">
+            <Link to={`/formularioTema/${tema.id}`} className="text-decorator-none">
                 <Box mx={1}>
                 <Button variant="contained" className="marginLeft" size='small' color="primary" >
-                    atualizar
+                    Atualizar
                 </Button>
                 </Box>
             </Link>
             <Link to={`/deletarTema/${tema.id}`} className="text-decorator-none">
                 <Box mx={1}>
                 <Button variant="contained" size='small' color="secondary">
-                    deletar
+                    Deletar
                 </Button>
                 </Box>
             </Link>
@@ -81,3 +108,7 @@ return (
 }
 
 export default ListaTemas
+
+function dispatch(arg0: Action) {
+    throw new Error('Function not implemented.');
+}

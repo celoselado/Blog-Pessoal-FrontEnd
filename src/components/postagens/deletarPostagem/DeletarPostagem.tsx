@@ -4,10 +4,79 @@ import { Box } from '@mui/material';
 import './DeletarPostagem.css';
 import Postagem from '../../../models/Postagem';
 import { buscaId, deleteId } from '../../../services/Service';
+import { useNavigate, useParams } from 'react-router-dom';
+import useLocalStorage from 'react-use-localstorage';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function DeletarPostagem() {
+    
+    let navigate = useNavigate();
+    const { id } = useParams<{id: string}>();
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
+    const [tema, setTema] = useState<Postagem>()
+
+    useEffect(() => {
+        if (token == "") {
+            toast.warn('Você precisa estar logado para acessar! :/', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+            navigate("/login")
+    
+        }
+    }, [token])
+
+    useEffect(() =>{
+        if(id !== undefined){
+            findById(id)
+        }
+    }, [id])
+
+    async function findById(id: string) {
+        buscaId(`/postagens/${id}`, setTema, {
+            headers: {
+            'Authorization': token
+            }
+        })
+        }
+        
+        function sim() {
+            navigate('/postagens')
+            deleteId(`/postagens/${id}`, {
+                headers: {
+                'Authorization': token
+                }
+            });
+            toast.success('Postagem deletada com sucesso! ^^', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+            }
+        
+            function nao() {
+            navigate('/postagens')
+            }
+            
+
 
     return (
+        
         <>
             <Box m={2}>
                 <Card variant="outlined" >
@@ -25,12 +94,12 @@ function DeletarPostagem() {
                     <CardActions>
                         <Box display="flex" justifyContent="start" ml={1.0} mb={2} >
                             <Box mx={2}>
-                                <Button variant="contained" className="marginLeft" size='large' color="primary">
+                                <Button onClick={sim} variant="contained" className="marginLeft" size='large' color="primary">
                                     Sim
                                 </Button>
                             </Box>
                             <Box>
-                                <Button variant="contained" size='large' color="secondary">
+                                <Button onClick={nao} variant="contained" size='large' color="secondary">
                                     Não
                                 </Button>
                             </Box>

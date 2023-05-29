@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Home from "./paginas/home/Home";
 import Navbar from "./components/estaticos/navbar/Navbar";
@@ -14,9 +11,15 @@ import CadastroPost from "./components/postagens/cadastroPostagem/CadastroPost";
 import CadastroTema from "./components/temas/cadastroTema/CadastroTema";
 import DeletarPostagem from "./components/postagens/deletarPostagem/DeletarPostagem";
 import DeletarTema from "./components/temas/deletarTema/DeletarTema";
+import { Provider } from "react-redux";
+import store from "./store/store";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
+    <Provider store={store}>
+      <ToastContainer />
     <BrowserRouter>
       <Navbar />
       <div style={{ minHeight: '100vh' }}>
@@ -37,6 +40,7 @@ function App() {
       </div>
       <Footer />
     </BrowserRouter>
+    </Provider>
   )
 }
 

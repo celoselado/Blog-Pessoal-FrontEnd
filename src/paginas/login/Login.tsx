@@ -6,10 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import UserLogin from '../../models/UserLogin';
 import useLocalStorage from 'react-use-localstorage';
 import { login } from '../../services/Service';
+import { useDispatch } from 'react-redux';
+import { addToken } from '../../store/tokens/actions';
+import { toast } from 'react-toastify';
 
 function Login() {
     let navigate = useNavigate();
-    const [token, setToken] = useLocalStorage('token');
+    const dispatch = useDispatch();
+    const [token, setToken] = useState('');
 
 
     const [userLogin, setUserLogin] = useState<UserLogin>(
@@ -31,6 +35,7 @@ function Login() {
     
     useEffect(() => {
         if(token != ''){
+            dispatch(addToken(token))
             navigate('/home')
         }
 
@@ -42,9 +47,27 @@ function Login() {
         try{
             await login(`/usuarios/logar`, userLogin, setToken)
 
-            alert('Usuário logado com sucesso!');
+            toast.success('Usuário logado com sucesso! ^^', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
         }catch(error){
-            alert('Usuário/Senha incorreto ou inexistênte')
+            toast.error('Usuário/Senha incorreto ou inexistênte! :/', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
         }
 
     }   
