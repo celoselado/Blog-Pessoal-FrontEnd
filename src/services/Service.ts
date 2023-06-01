@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: 'https://blogpessoal-5z1b.onrender.com'
+    baseURL: import.meta.env.VITE_API_URL
 })
 
 
@@ -39,3 +39,5 @@ export const deleteId = async(url: any, header: any) => {
     await api.delete(url, header)
     
 }
+
+
